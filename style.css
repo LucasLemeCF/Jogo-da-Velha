@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(-45deg, rgba(20,156,189,1) 0%, rgba(20,189,172,1) 75%);
+}
+
+#principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 50px;
+}
+
+
+
+/*Tabuleiro*/
+#caixa1 {
+    background-color: #ebebeb;
+    width: 340px;
+    height: 420px;
+    margin:10px;
+    border-radius: 10px;
+    box-shadow: 1.5px 1px 7px black;
+}
+
+
+.titulo {
+    font:36px cursive;
+    margin: 20px auto;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+#tabuleiro {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.quadrado {
+	width: 100px;
+	height: 100px;
+    font:60px cursive;
+    text-align: center;
+}
+
+.linha-vertical {
+    height: 300px;
+    border-right: 3px solid rgba(0, 0, 0, 0.5);
+    Position: absolute;
+}
+.c1 {margin-left: 100px;}
+.c2 {margin-left: 200px;}
+
+.linha-horizontal {
+    width: 300px;
+    border-bottom: 3px solid  rgba(0, 0, 0, 0.5);
+    Position: absolute;
+}
+.l1 {margin-top: 95px;}
+.l2 {margin-top: 195px;}
+
+
+
+
+/*Placar*/
+#caixa2 {
+    background-color: #ebebeb;
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: 1.5px 1px 7px black;
+    display: flex;
+    flex-wrap: wrap;  
+}
+
+
+#placar1 {
+    width: 280px;
+    height: 105px;
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid black;
+}
+
+#caixa2 .container {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+#caixa2 .caixa1 {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    text-align: center;
+    font:30px cursive;
+}
+
+#x {
+    color: white;
+    background: rgba(0, 0, 255, 0.85);
+    box-shadow: 4px 4px 10px 1px black;
+    transition: 0.5s ease-in-out;
+}
+
+#linha {
+    color: black;
+}
+
+#o {
+    color: white;
+    background: rgba(255, 0, 0, 0.85);
+    transition: 0.5s ease-in-out;
+}
+
+#caixa2 .caixa2 {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    font:30px cursive;
+}
+
+#placar2 {
+    width: 280px;
+    height: 105px;
+    margin: 10px 20px;
+    display: flex;
+    color: white
+}
+
+#placar2 .caixa2 {
+    height: 80px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+#placar2 .cor {
+    color: white;
+    background:#14bdac;
+    border-radius: 5px 5px 0 0;
+    transition: width linear;
+}
+
+#placar-x-numero, #placar-empate-numero, #placar-o-numero {
+    color: rgba(0, 0, 0, 0.85);
+    font:25px cursive;
+}
+
+#placar-x, #placar-empate, #placar-o {
+    transition: 0.3s ease-in-out;
+}
+
+#placar-x:hover, #placar-empate:hover, #placar-o:hover {
+    box-shadow: 1px 1px 10px 0.3px black;
+    transform: scale(1.05, 1.05);
+}
+
+
+
+/*Link*/
+#rodape {
+	position: absolute;
+    bottom: 0;
+}
+
+
+
+/*Final da partida*/
+.borda {
+    box-shadow: 4px 4px 10px 1px black;
+}
+
+.vencedor {
+    display: flex;
+    z-index:1;
+    font:30px cursive;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    color: blue;
+    padding: 20px;
+    text-align: center;
+    width: 350px;
+    height: 200px;
+    background-color: white;
+    box-shadow: 3px 3px 7px 0px blue;
+    border-radius: 10px;
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.6s linear;
+}
+
+.vencedor:hover {
+    opacity: 0.5;
+}
+
+.reiniciar:hover {
+    -webkit-transform: scale(1.25, 1.25);
+    transform: scale(1.25, 1.25);
+    border: none;
+    border-radius: 10px;
+}
+
+
+.vencedorvermelho {
+    color: red;
+    box-shadow: 3px 3px 7px 0px ;
+}
+
+.vencedorpreto {
+    color: black;
+    box-shadow: 3px 3px 7px 0px ;
+}
+
+.reiniciar {
+    font:20px cursive ;
+    font-weight: bolder;
+    color: white;
+    padding: 6px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 50px;
+    background-color: rgba(0, 0, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    border: none;
+}
+
+.reiniciarvermelho {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+.reiniciarpreto {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.textoJogador:hover {
+    font-size: 15px;
+}

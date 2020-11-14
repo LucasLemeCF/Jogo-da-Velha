@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jogo da Velha</title>
+<link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div id="principal">
+
+    <div id="vencedor"><div id="vencedorTexto"></div><div id="reiniciar"  onclick="reiniciar()"></div></div>
+
+    <div id="caixa1"  onmouseover="mostrador1()" onmouseout="mostrador01()">
+        <h1 class="titulo">Jogo da Velha</h1>
+        
+        <div id="tabuleiro">
+
+            <div class="linha-vertical c1"></div>
+            <div class="linha-vertical c2"></div>
+            <div class="linha-horizontal l1"></div>
+            <div class="linha-horizontal l2"></div>
+
+            <div class="quadrado" id="a1" jogada=""></div> 
+            <div class="quadrado" id="b1" jogada=""></div> 
+            <div class="quadrado" id="c1" jogada=""></div>
+
+            <div class="quadrado" id="a2" jogada=""></div>
+            <div class="quadrado" id="b2" jogada=""></div>
+            <div class="quadrado" id="c2" jogada=""></div>
+
+            <div class="quadrado" id="a3" jogada=""></div>
+            <div class="quadrado" id="b3" jogada=""></div>
+            <div class="quadrado" id="c3" jogada=""></div>
+
+        </div> 
+    </div>	
+
+    <div id="caixa2" onmouseover="mostrador2()" onmouseout="mostrador02()">
+        
+        <div id="placar1">
+            <div class="container" >
+                <div class="caixa1" id="x">X</div>
+                <div class="caixa1" id="linha">-</div>
+                <div class="caixa1" id="o">O</div>
+            </div>
+        </div>
+
+        <div id="separador"></div>
+
+        <div id="placar2">
+            <div class="container">
+                <div class="caixa2" id="placar-x"><div class="cor">X</div><div id="placar-x-numero">0</div></div>
+                <div class="caixa2" id="placar-empate"><div class="cor">E</div><div id="placar-empate-numero">0</div></div>
+                <div class="caixa2" id="placar-o"><div class="cor">O</div><div id="placar-o-numero">0</div></div>
+            </div> 
+        </div>
+
+    </div>
+    
+</div>
+
+    <div id="rodape"><a href="https://www.linkedin.com/in/lucas-leme" style="color: white">@Lucas Leme</a></div>
+
+    <script src="code.js"></script>
+
+</body>
+</html>

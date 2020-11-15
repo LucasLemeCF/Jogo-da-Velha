@@ -4,13 +4,13 @@
     box-sizing: border-box;
 }
 
-@media(max-width: 340px){
+@media(max-width: 400px){
 body {
     background: #14bdac;
 }
 }
 
-@media(min-width: 340px){
+@media(min-width: 400px){
 body {
     width: 100vw;
     height: 100vh;

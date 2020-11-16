@@ -129,6 +129,7 @@ body {
 
 .sombra-normal {
     box-shadow: 1.5px 1px 7px black;
+    cursor: pointer;
 }
 
 .sombra-espessa {
@@ -171,11 +172,13 @@ body {
     font-size:25px;
 }
 
-#placar-x, #placar-empate, #placar-o, #botao-modos-de-jogo {
+#placar-x, #placar-empate, #placar-o, #botao-modos-de-jogo, 
+#Jogador-Vs-Jogador, #Jogador-Vs-Maquina  {
     transition: 0.3s ease-in-out;
 }
 
-#placar-x:hover, #placar-empate:hover, #placar-o:hover, #botao-modos-de-jogo:hover {
+#placar-x:hover, #placar-empate:hover, #placar-o:hover, #botao-modos-de-jogo:hover, 
+#Jogador-Vs-Jogador:hover, #Jogador-Vs-Maquina:hover {
     box-shadow: 1px 1px 10px 0.3px black;
     transform: scale(1.05, 1.05);
 }
@@ -285,4 +288,49 @@ body {
     font-size: 18px;
     text-align: center;
     padding-top: 4px;
+}
+
+#modos-de-jogo-interface {
+    z-index: 10;
+    visibility: hidden;
+    position: absolute;
+    background-color: #ebebeb;
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;  
+}
+
+.modos-de-jogo {
+    width: 270px;
+    height: 105px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    margin: 10px auto;
+}
+
+#Jogador-Vs-Jogador {
+    background-color: rgba(0, 0, 255, 0.8);
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+#Jogador-Vs-Maquina {
+    background-color:rgba(255, 0, 0, 0.8);
+}
+
+h1 {
+    font-size: 18px;
+}
+
+#texto-Jogador-Vs-Jogador {
+    margin-top: 10px;
+}
+
+#texto-Jogador-Vs-Maquina {
+    margin-top: 5px;
+    font-size: 15px;
 }

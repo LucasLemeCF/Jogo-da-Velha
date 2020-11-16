@@ -1,22 +1,25 @@
-const jogador1 = "X", jogador2 = "O";
 var rodada="X", c=1, vencedor="", jx=0, jo=0, e=0;
 
 document.getElementById("x").classList.add("sombra-espessa");
 
 //Troca de quem começa
-document.getElementById('o').addEventListener('click', event => {
+var O = document.getElementById('o');
+O.addEventListener('click', event => {
     if(c == 1) {
         rodada = "X";
         trocaRodada();
     }
 })
-document.getElementById('x').addEventListener('click', event => {
+
+var X = document.getElementById('x');
+X.addEventListener('click', event => {
     if(c == 1) {
         rodada = "O";
         trocaRodada();
     }
 })
 
+//Escuta a escolha do jogador
 document.querySelectorAll('.quadrado').forEach(item => {
     item.addEventListener('click', event => {
 
@@ -178,3 +181,16 @@ function trocaRodada() {
         document.getElementById("x").classList.remove("sombra-normal");
     }
 }
+
+document.getElementById("botao-modos-de-jogo").addEventListener("click", event => {
+    document.getElementById("modos-de-jogo-interface").style.visibility = "visible";
+   document.getElementById("Jogador-Vs-Jogador").style.visibility = "visible";
+   document.getElementById("Jogador-Vs-Maquina").style.visibility = "visible";
+})
+
+
+document.getElementById("Jogador-Vs-Jogador").addEventListener("click", event => {
+    document.getElementById("Jogador-Vs-Jogador").style.visibility = "hidden";
+    document.getElementById("Jogador-Vs-Maquina").style.visibility = "hidden";
+    setTimeout(() => {  document.getElementById("modos-de-jogo-interface").style.visibility = "hidden";}, 300);
+})

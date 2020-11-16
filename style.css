@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: cursive;
 }
 
 @media(max-width: 400px){
@@ -26,8 +27,6 @@ body {
     padding-top: 50px;
 }
 
-
-
 /*Tabuleiro*/
 #caixa1 {
     background-color: #ebebeb;
@@ -41,7 +40,7 @@ body {
 
 .titulo {
     
-    font:36px cursive;
+    font-size:36px;
     margin: 20px auto;
     text-align: center;
     color: rgba(0, 0, 0, 0.8);
@@ -58,7 +57,7 @@ body {
 .quadrado {
 	width: 100px;
 	height: 100px;
-    font:60px cursive;
+    font-size:60px;
     text-align: center;
 }
 
@@ -78,9 +77,6 @@ body {
 .l1 {margin-top: 95px;}
 .l2 {margin-top: 195px;}
 
-
-
-
 /*Placar*/
 #caixa2 {
     background-color: #ebebeb;
@@ -92,14 +88,11 @@ body {
     flex-wrap: wrap;  
 }
 
-
 #placar1 {
-    width: 280px;
-    height: 105px;
-    margin: 10px 20px;
+    width: 300px;
+    height: 100px;
     display: flex;
     flex-direction: row;
-    border-bottom: 2px solid black;
 }
 
 #caixa2 .container {
@@ -113,7 +106,7 @@ body {
     height: 50px;
     border-radius: 5px;
     text-align: center;
-    font:30px cursive;
+    font-size:30px;
 }
 
 #x {
@@ -138,13 +131,13 @@ body {
     height: 40px;
     border-radius: 5px;
     text-align: center;
-    font:30px cursive;
+    font-size:28px;
 }
 
 #placar2 {
     width: 280px;
-    height: 105px;
-    margin: 10px 20px;
+    height: 100px;
+    margin: 0px 20px;
     display: flex;
     color: white
 }
@@ -166,7 +159,7 @@ body {
 
 #placar-x-numero, #placar-empate-numero, #placar-o-numero {
     color: rgba(0, 0, 0, 0.85);
-    font:25px cursive;
+    font-size:25px;
 }
 
 #placar-x, #placar-empate, #placar-o {
@@ -178,15 +171,11 @@ body {
     transform: scale(1.05, 1.05);
 }
 
-
-
 /*Link*/
 #rodape {
 	position: absolute;
     margin-top: 0;
 }
-
-
 
 /*Final da partida*/
 .borda {
@@ -196,7 +185,7 @@ body {
 .vencedor {
     display: flex;
     z-index:1;
-    font:30px cursive;
+    font-size: 30px;
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
@@ -237,7 +226,7 @@ body {
 }
 
 .reiniciar {
-    font:20px cursive ;
+    font-size:20px ;
     font-weight: bolder;
     color: white;
     padding: 6px;
@@ -262,4 +251,30 @@ body {
 
 .textoJogador:hover {
     font-size: 15px;
+}
+
+/*Novo modo de Jogo*/
+#modos-de-jogo {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 40px;
+}
+
+.separador {
+    width: 20%;
+    height: 20px;
+    margin: 0 2.5%;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+}
+
+#botao-modos-de-jogo {
+    width: 45%;
+    height: 40px;  
+    background:#14bdac;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 4px;
 }

@@ -1,6 +1,22 @@
 const jogador1 = "X", jogador2 = "O";
 var rodada="X", c=1, vencedor="", jx=0, jo=0, e=0;
 
+document.getElementById("x").classList.add("sombra-espessa");
+
+//Troca de quem começa
+document.getElementById('o').addEventListener('click', event => {
+    if(c == 1) {
+        rodada = "X";
+        trocaRodada();
+    }
+})
+document.getElementById('x').addEventListener('click', event => {
+    if(c == 1) {
+        rodada = "O";
+        trocaRodada();
+    }
+})
+
 document.querySelectorAll('.quadrado').forEach(item => {
     item.addEventListener('click', event => {
 
@@ -10,17 +26,7 @@ document.querySelectorAll('.quadrado').forEach(item => {
             item.setAttribute("jogada" , rodada);
 
             //Troca de rodada
-            if(rodada=="X") {
-                rodada = "O";
-                document.getElementById("x").style.boxShadow = "none";
-                document.getElementById("x").classList.remove("borda");
-                document.getElementById("o").classList.add("borda");
-            } else {
-                rodada = "X";
-                document.getElementById("x").style.boxShadow = "4px 4px 10px 1px black";
-                document.getElementById("o").classList.remove("borda");
-                document.getElementById("x").classList.add("borda");
-            }
+            trocaRodada();
      
             vitoria();
 
@@ -155,4 +161,20 @@ function placarVitoriaO() {
 function placarEmpate() {
     e++;
     document.getElementById("placar-empate-numero").innerHTML = e;
+}
+
+function trocaRodada() {
+    if(rodada=="X") {
+        rodada = "O";
+        document.getElementById("x").classList.remove("sombra-espessa");
+        document.getElementById("x").classList.add("sombra-normal");
+        document.getElementById("o").classList.add("sombra-espessa");
+        document.getElementById("o").classList.remove("sombra-normal");
+    } else {
+        rodada = "X";
+        document.getElementById("o").classList.remove("sombra-espessa");
+        document.getElementById("o").classList.add("sombra-normal");
+        document.getElementById("x").classList.add("sombra-espessa");
+        document.getElementById("x").classList.remove("sombra-normal");
+    }
 }

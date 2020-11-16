@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: cursive;
+    cursor: default;
 }
 
 @media(max-width: 400px){
@@ -59,6 +60,7 @@ body {
 	height: 100px;
     font-size:60px;
     text-align: center;
+    cursor: pointer;
 }
 
 .linha-vertical {
@@ -112,7 +114,6 @@ body {
 #x {
     color: white;
     background: rgba(0, 0, 255, 0.85);
-    box-shadow: 4px 4px 10px 1px black;
     transition: 0.5s ease-in-out;
 }
 
@@ -124,6 +125,14 @@ body {
     color: white;
     background: rgba(255, 0, 0, 0.85);
     transition: 0.5s ease-in-out;
+}
+
+.sombra-normal {
+    box-shadow: 1.5px 1px 7px black;
+}
+
+.sombra-espessa {
+    box-shadow: 4px 4px 10px 1px black;
 }
 
 #caixa2 .caixa2 {
@@ -139,7 +148,7 @@ body {
     height: 100px;
     margin: 0px 20px;
     display: flex;
-    color: white
+    color: white;
 }
 
 #placar2 .caixa2 {
@@ -162,24 +171,23 @@ body {
     font-size:25px;
 }
 
-#placar-x, #placar-empate, #placar-o {
+#placar-x, #placar-empate, #placar-o, #botao-modos-de-jogo {
     transition: 0.3s ease-in-out;
 }
 
-#placar-x:hover, #placar-empate:hover, #placar-o:hover {
+#placar-x:hover, #placar-empate:hover, #placar-o:hover, #botao-modos-de-jogo:hover {
     box-shadow: 1px 1px 10px 0.3px black;
     transform: scale(1.05, 1.05);
+}
+
+#botao-modos-de-jogo:hover {
+    cursor: pointer;
 }
 
 /*Link*/
 #rodape {
 	position: absolute;
     margin-top: 0;
-}
-
-/*Final da partida*/
-.borda {
-    box-shadow: 4px 4px 10px 1px black;
 }
 
 .vencedor {

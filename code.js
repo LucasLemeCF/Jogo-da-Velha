@@ -1,107 +1,128 @@
 var rodada = "X", jogador = "X", c = 0, vencedor = "", jx = 0, jo = 0, e = 0, iter = 0;
 var tabuleiro = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-var VsMaquina = false, inverter = false, p=0;
+var tabuleiroSimbolo = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+var VsMaquina = false, inverter = false, p = 0;
+
+var jogador1 = "X";
+var jogador2 = "O";
+
+
+//testes
+var huPlayer = "P";
+var aiPlayer = "C";
+var round = 0;
+var huCo = "X";
+var aiCo = "O";
 
 document.getElementById("x").classList.add("sombra-espessa");
 
+//Lembrar de mudar o reset do botao
+
 document.querySelectorAll('.quadrado').forEach(item => {
     item.addEventListener('click', event => {
-        
-        var VsMaquina = document.getElementById("Jogador-Vs-Maquina").getAttribute("Jogador-Vs-Maquina");      
-        
-        if (VsMaquina == "true") {
-            console.log("Jogador Vs Maquina");
 
-            //Faz a jogada
-            if (tabuleiro[item.id] != "X" && tabuleiro[item.id] != "O") {
-                console.log(c);
-
-                if (p > 0) {
-                    trocaRodada();
-                    p=0;
-                }
-
-                c++;
-                tabuleiro[item.id] = jogador;
-                document.getElementById(item.id).innerHTML = rodada;
-
-                console.log("jogador " + rodada);
-                console.log(tabuleiro);
-
-                if (venceu(tabuleiro, rodada)) {
-
-                   // inverter = true;
-                    funcVencedor();
-                    return;
-                } else if (c > 8) {
-                    empate();
-                    return;
-                } else {
-                    trocaRodada();
-                    c++;
-                               
-                    var index = minimax(tabuleiro, rodada).index;         
-                    document.getElementById(index).innerHTML = rodada;
-                    tabuleiro[index] = rodada;
-                   // console.log(tabuleiro);
-                   // console.log(index);
-                    console.log("funcionou");
-                    if (venceu(tabuleiro, rodada)) {
-                       
-                       // inverter = true;
-                        funcVencedor();
-                        trocaRodada();
-                        return;
-                    } else if (c > 8) {
-                        empate();
-                        return;
-                    }
-                    trocaRodada();
-                }
-            }
+        if (VsMaquina == true) {
+            move(item, huPlayer, huCo);
         } else {
-            console.log("Jogador Vs Jogador");
-
-            //Jogador Vs Jogador
-            if (tabuleiro[item.id] != "X" && tabuleiro[item.id] != "O") {
-
-                c++;
-                tabuleiro[item.id] = jogador;
-                document.getElementById(item.id).innerHTML = rodada;
-
-                console.log("jogador " + rodada);
-                console.log(tabuleiro);
-
-                if (venceu(tabuleiro, rodada)) {
-                    funcVencedor();
-                    return;
-                } else if (c > 8) {
-                    empate();
-                    return;
-                } else {
-                    trocaRodada();
-                }
-            }
+            JxJ(item);
         }
+        console.log("clicked");
     })
 })
+
+function move(element, player, simbolo) {
+
+    if (tabuleiro[element.id] != "P" && tabuleiro[element.id] != "C") {
+        round++;
+        console.log(element.id);
+        document.getElementById(element.id).innerHTML = simbolo;
+        tabuleiro[element.id] = player;
+        tabuleiroSimbolo[element.id] = huCo;
+
+        console.log(tabuleiro);
+
+        if (venceu(tabuleiro, player)) {
+            funcVencedor();
+            return;
+        } else if (round > 8) {
+            empate();
+            return;
+        } else {
+
+            //vez da maquina
+            round++;
+            var index = minimax(tabuleiro, aiPlayer).index;
+            document.getElementById(index).innerHTML = aiCo;
+            tabuleiro[index] = aiPlayer;
+            tabuleiroSimbolo[index] = aiCo;
+            console.log(tabuleiroSimbolo);
+            console.log(tabuleiro);
+            console.log(index);
+            if (venceu(tabuleiro, aiPlayer)) {
+                funcVencedor();
+                return;
+            } else if (round === 0) {
+                empate();
+                return;
+            }
+        }
+    }
+
+}
+
+function JxJ(item) {
+
+    console.log("Jogador Vs Jogador");
+    c++;
+    tabuleiro[item.id] = rodada;
+    document.getElementById(item.id).innerHTML = rodada;
+
+    console.log("jogador " + rodada);
+    console.log(tabuleiro);
+
+    if (venceu(tabuleiro, rodada)) {
+        funcVencedor();
+        return;
+    } else if (c > 8) {
+        empate();
+        return;
+    } else {
+        trocaRodada();
+    }
+}
+
+function reset() {
+    round = 0;
+    board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+}
+
 
 function funcVencedor() {
 
     var fim = document.getElementById("vencedor");
     var reiniciar = document.getElementById("reiniciar");
 
-    if (rodada == "O") {
-        fim.classList.add("vencedorvermelho");
-        reiniciar.classList.add("reiniciarvermelho");
+    if (VsMaquina == true) {
+        if (aiCo == "O") {
+            fim.classList.add("vencedorvermelho");
+            reiniciar.classList.add("reiniciarvermelho");
+        } else {
+            fim.classList.remove("vencedorvermelho");
+            reiniciar.classList.remove("reiniciarvermelho");
+        }
+        document.getElementById("vencedorTexto").innerHTML = "'" + aiCo + "' Venceu";
+    } else {
+        if (rodada == "O") {
+            fim.classList.add("vencedorvermelho");
+            reiniciar.classList.add("reiniciarvermelho");
+        }
+        document.getElementById("vencedorTexto").innerHTML = "'" + rodada + "' Venceu";
     }
 
-    document.getElementById("vencedorTexto").innerHTML = "'" + rodada + "' Venceu";
+    reiniciar.classList.add("reiniciar");
     document.getElementById("reiniciar").innerHTML = "Jogar Novamente";
 
     fim.classList.add("vencedor");
-    reiniciar.classList.add("reiniciar");
-    if (reiniciar.onclick(reiniciar()));
 }
 
 function reiniciar() {
@@ -111,12 +132,30 @@ function reiniciar() {
 
     var fim = document.getElementById("vencedor");
     var reiniciar = document.getElementById("reiniciar");
-    console.log("venceu(tabuleiro, rodada)");
-    
-   // if (VsMaquina == "true") {rodada = rodada == "X" ? "O" : "X";}
-    console.log(rodada);
-    console.log(tabuleiro);
-    console.log(venceu(tabuleiro, rodada));
+
+    if (VsMaquina == true) {
+        if (venceu(tabuleiroSimbolo, aiCo)) {
+            rodada = aiCo;
+
+        }
+        else {
+            rodada = huCo;
+        }
+    }
+
+    //jxM
+    if (rodada == "X" && venceu(tabuleiroSimbolo, rodada)) {
+        fim.classList.remove("vencedorvermelho");
+        reiniciar.classList.remove("reiniciarvermelho");
+        jx++;
+        document.getElementById("placar-x-numero").innerHTML = jx;
+    } else if (rodada == "O" && venceu(tabuleiroSimbolo, rodada)) {
+        fim.classList.remove("vencedor");
+        jo++;
+        document.getElementById("placar-o-numero").innerHTML = jo;
+    }
+
+    //JxJ
     if (rodada == "O" && venceu(tabuleiro, rodada)) {
         fim.classList.remove("vencedorvermelho");
         reiniciar.classList.remove("reiniciarvermelho");
@@ -137,6 +176,7 @@ function reiniciar() {
     document.getElementById("reiniciar").innerHTML = "";
     c = 0;
     tabuleiro = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    reset();
     p++;
 }
 
@@ -155,42 +195,33 @@ function empate() {
 
     e++;
     document.getElementById("placar-empate-numero").innerHTML = e;
-    if (reiniciar.onclick(reiniciar()));
+    reset();
 }
 
 //Troca de quem começa
 var O = document.getElementById('o');
 O.addEventListener('click', event => {
-    if (c == 0) {
-        rodada = "X";
-        trocaRodada();
+    if (c == 0 || round == 0) {
+        if (VsMaquina == true) {
+            trocaSimbolo();
+        } else {
+            rodada = "X";
+            trocaRodada();
+        }
     }
 })
 
 var X = document.getElementById('x');
 X.addEventListener('click', event => {
-    if (c == 0) {
-        rodada = "O";
-        trocaRodada();
+    if (c == 0 || round == 0) {
+        if (VsMaquina == true) {
+            trocaSimbolo();
+        } else {
+            rodada = "O";
+            trocaRodada();
+        }
     }
 })
-
-function venceu(tabuleiro, jogador) {
-    if (
-        (tabuleiro[0] == jogador && tabuleiro[1] == jogador && tabuleiro[2] == jogador) ||
-        (tabuleiro[3] == jogador && tabuleiro[4] == jogador && tabuleiro[5] == jogador) ||
-        (tabuleiro[6] == jogador && tabuleiro[7] == jogador && tabuleiro[8] == jogador) ||
-        (tabuleiro[0] == jogador && tabuleiro[3] == jogador && tabuleiro[6] == jogador) ||
-        (tabuleiro[1] == jogador && tabuleiro[4] == jogador && tabuleiro[7] == jogador) ||
-        (tabuleiro[2] == jogador && tabuleiro[5] == jogador && tabuleiro[8] == jogador) ||
-        (tabuleiro[0] == jogador && tabuleiro[4] == jogador && tabuleiro[8] == jogador) ||
-        (tabuleiro[2] == jogador && tabuleiro[4] == jogador && tabuleiro[6] == jogador)
-    ) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 function trocaRodada() {
     if (rodada == "X") {
@@ -210,19 +241,24 @@ function trocaRodada() {
     }
 }
 
-function trocaRodadaMaquina() {
-    if (rodada == "X") {
+function trocaSimbolo() {
+    if (huCo == "X") {
+        huCo = "O";
         document.getElementById("x").classList.remove("sombra-espessa");
         document.getElementById("x").classList.add("sombra-normal");
         document.getElementById("o").classList.add("sombra-espessa");
         document.getElementById("o").classList.remove("sombra-normal");
+        aiCo = "X";
     } else {
- document.getElementById("o").classList.remove("sombra-espessa");
+        huCo = "X";
+        document.getElementById("o").classList.remove("sombra-espessa");
         document.getElementById("o").classList.add("sombra-normal");
         document.getElementById("x").classList.add("sombra-espessa");
         document.getElementById("x").classList.remove("sombra-normal");
+        aiCo = "O";
     }
 }
+
 
 //efeito de opacidade no final do jogo
 function mostrador1() {
@@ -243,8 +279,11 @@ document.getElementById("Jogador-Vs-Jogador").addEventListener("click", event =>
     document.getElementById("Jogador-Vs-Maquina").style.visibility = "hidden";
     setTimeout(() => { document.getElementById("modos-de-jogo-interface").style.visibility = "hidden"; }, 300);
     document.getElementById("Jogador-Vs-Maquina").setAttribute("Jogador-Vs-Maquina", false);
+    VsMaquina = false;
     limpaPlacar();
+    funcVencedor();
     reiniciar();
+    console.log("Jogador Vs Jogador");
 })
 document.getElementById("Jogador-Vs-Maquina").addEventListener("click", event => {
     document.getElementById("Jogador-Vs-Jogador").style.visibility = "hidden";
@@ -252,7 +291,10 @@ document.getElementById("Jogador-Vs-Maquina").addEventListener("click", event =>
     setTimeout(() => { document.getElementById("modos-de-jogo-interface").style.visibility = "hidden"; }, 300);
     document.getElementById("Jogador-Vs-Maquina").setAttribute("Jogador-Vs-Maquina", true);
     limpaPlacar();
+    funcVencedor()
     reiniciar();
+    VsMaquina = true;
+    console.log("Jogador Vs Maquina");
 })
 
 function limpaPlacar() {
@@ -265,15 +307,14 @@ function limpaPlacar() {
 }
 
 //Maquina
-function minimax(tabuleiro, player) {
-    var player1 = rodada == "X" ? "O" : "X";
+function minimax(tabuleiro2, player) {
     iter++;
-    let array = avail(tabuleiro);
-    if (venceu(tabuleiro, player1)) {
+    let array = avail(tabuleiro2);
+    if (venceu(tabuleiro2, huPlayer)) {
         return {
             score: -10
         };
-    } else if (venceu(tabuleiro, rodada)) {
+    } else if (venceu(tabuleiro2, aiPlayer)) {
         return {
             score: 10
         };
@@ -286,22 +327,22 @@ function minimax(tabuleiro, player) {
     var moves = [];
     for (var i = 0; i < array.length; i++) {
         var move = {};
-        move.index = tabuleiro[array[i]];
-        tabuleiro[array[i]] = player;
+        move.index = tabuleiro2[array[i]];
+        tabuleiro2[array[i]] = player;
 
-        if (player == rodada) {
-            var g = minimax(tabuleiro, player1);
+        if (player == aiPlayer) {
+            var g = minimax(tabuleiro2, huPlayer);
             move.score = g.score;
         } else {
-            var g = minimax(tabuleiro, rodada);
+            var g = minimax(tabuleiro2, aiPlayer);
             move.score = g.score;
         }
-        tabuleiro[array[i]] = move.index;
+        tabuleiro2[array[i]] = move.index;
         moves.push(move);
     }
 
     var bestMove;
-    if (player === rodada) {
+    if (player === aiPlayer) {
         var bestScore = -10000;
         for (var i = 0; i < moves.length; i++) {
             if (moves[i].score > bestScore) {
@@ -321,6 +362,23 @@ function minimax(tabuleiro, player) {
     return moves[bestMove];
 }
 
-function avail(tabuleiro) {
-    return tabuleiro.filter(s => s != "X" && s != "O");
+function avail(tabuleiro2) {
+    return tabuleiro2.filter(s => s != "P" && s != "C");
+}
+
+function venceu(tabuleiro, jogador) {
+    if (
+        (tabuleiro[0] == jogador && tabuleiro[1] == jogador && tabuleiro[2] == jogador) ||
+        (tabuleiro[3] == jogador && tabuleiro[4] == jogador && tabuleiro[5] == jogador) ||
+        (tabuleiro[6] == jogador && tabuleiro[7] == jogador && tabuleiro[8] == jogador) ||
+        (tabuleiro[0] == jogador && tabuleiro[3] == jogador && tabuleiro[6] == jogador) ||
+        (tabuleiro[1] == jogador && tabuleiro[4] == jogador && tabuleiro[7] == jogador) ||
+        (tabuleiro[2] == jogador && tabuleiro[5] == jogador && tabuleiro[8] == jogador) ||
+        (tabuleiro[0] == jogador && tabuleiro[4] == jogador && tabuleiro[8] == jogador) ||
+        (tabuleiro[2] == jogador && tabuleiro[4] == jogador && tabuleiro[6] == jogador)
+    ) {
+        return true;
+    } else {
+        return false;
+    }
 }

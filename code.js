@@ -208,6 +208,8 @@ O.addEventListener('click', event => {
             rodada = "X";
             trocaRodada();
         }
+        reset();
+        limpaPlacar();
     }
 })
 
@@ -220,6 +222,8 @@ X.addEventListener('click', event => {
             rodada = "O";
             trocaRodada();
         }
+        reset();
+        limpaPlacar();
     }
 })
 
